@@ -1,5 +1,6 @@
 package com.example.stikerrli
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.Toast
@@ -9,17 +10,20 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
-    // Inisialisasi binding
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Menggunakan ViewBinding untuk memuat layout
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Menggunakan binding untuk mengakses ID dari XML
+        // NAVIGASI: Pindah ke Register
+        binding.TextRegis.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        // LOGIC: Tombol Login
         binding.ButtonRegis.setOnClickListener {
             val username = binding.UsernameRegis.text.toString()
             val password = binding.PasswordRegis.text.toString()
@@ -40,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                 params["password"] = password
 
                 val rh = RequestHandler()
-                // Gunakan 'Konfigurasi' dengan huruf kapital sesuai nama object-nya
                 return rh.sendPostRequest(Konfigurasi.URL_LOGIN, params)
             }
 
@@ -48,17 +51,14 @@ class MainActivity : AppCompatActivity() {
                 super.onPostExecute(s)
                 try {
                     val jsonObject = JSONObject(s)
-                    val status = jsonObject.getString("status")
-                    val message = jsonObject.getString("message")
-
-                    if (status == "success") {
-                        Toast.makeText(this@MainActivity, "Selamat Datang!", Toast.LENGTH_LONG).show()
-                        // Pindah ke halaman Dashboard jika perlu
+                    if (jsonObject.getString("status") == "success") {
+                        startActivity(Intent(this@MainActivity, HomePage::class.java))
+                        finish()
                     } else {
-                        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, jsonObject.getString("message"), Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -12,39 +12,34 @@
         android:theme="@style/Theme.Stikerrli"
         android:usesCleartextTraffic="true">
 
+        <!-- LOGIN (HALAMAN AWAL) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".LoginActivity2"
-            android:exported="false" />
-
-        <activity
-            android:name=".Activity_login"
-            android:exported="false" />
-
+        <!-- REGISTER -->
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
 
+        <!-- HOME -->
         <activity
             android:name=".HomePage"
             android:exported="false" />
 
+        <!-- CATEGORY -->
         <activity
             android:name=".CategoryActivity"
             android:exported="false" />
 
     </application>
+
 
 </manifest>

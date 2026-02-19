@@ -1,7 +1,8 @@
 package com.example.stikerrli
 
 object Konfigurasi {
-    private const val BASE_URL = "http://10.0.2.2/"
+    // Sesuaikan path folder sesuai letak file PHP di htdocs kamu
+    private const val BASE_URL = "http://10.0.2.2/sticker-api/"
 
     // --- AUTH ---
     const val URL_LOGIN = BASE_URL + "login.php"

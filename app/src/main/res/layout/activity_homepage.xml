@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF6E6"
-    tools:context=".HomePage2">
+    tools:context=".HomePage">
 
     <!-- HEADER PROFILE -->
     <LinearLayout
